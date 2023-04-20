@@ -1,0 +1,19 @@
+<h2 class="m-5 text-center">Editar Horario</h2>
+<p-card class="flex justify-content-center card-margin">
+  <form [formGroup]="editScheduleForm" (ngSubmit)="onSubmitEdit()">
+    <div class="form-group">
+      <label for="startTime" class="row ms-2 mt-2">Hora de Inicio:</label>
+      <p-calendar id="startTime" [showIcon]="true" [timeOnly]="true" formControlName="startTime"></p-calendar>
+    </div>
+    <div class="form-group">
+      <label for="endTime" class="row ms-2 mt-2">Hora de Fin:</label>
+      <p-calendar id="endTime" [showIcon]="true" [timeOnly]="true" formControlName="endTime"></p-calendar>
+    </div>
+
+    <div class="text-center">
+    <button type="submit" class="btn btn-primary mt-5 mb-5 me-3">Guardar</button>
+    <button type="button" class="btn btn-danger" (click)="cancelEdit()">Cancelar</button>
+    </div>
+</form>
+</p-card>
+

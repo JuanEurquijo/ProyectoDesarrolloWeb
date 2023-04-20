@@ -1,0 +1,39 @@
+<div class="container pt-5">
+  <h1 class="title-color text-center">Listado de Rutas - Transmilenio</h1>
+</div>
+<div class="container">
+  <a class="btn btn-primary btn-sm my-4" routerLink="/route/create" routerLinkActive="active">Nueva Ruta</a>
+
+  <div>
+    <input type="text" pInputText class="ms-0 mb-2" [(ngModel)]="searchQuery" placeholder="Buscar por código" (keyup)="search()">
+  </div>
+
+  <table class="table table-bordered text-center margin-table table-style">
+    <thead class="table-primary">
+      <tr>
+        <th scope="col">Código</th>
+        <th scope="col">Estaciones</th>
+        <th scope="col">Horario</th>
+        <th scope="col">Editar</th>
+        <th scope="col">Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let route of filteredRoutes">
+        <td class="table-text">{{route.code}}</td>
+        <td>
+          <button class="btn btn-info btn-sm" [routerLink]="['/route', route.id,'stations']">Ver Estaciones</button>
+        </td>
+        <td>
+          <button class="btn btn-info btn-sm" [routerLink]="['/route', route.id,'schedules']">Ver Horario Asignado</button>
+        </td>
+        <td>
+          <button class="btn btn-info btn-sm" [routerLink]="['/route/edit', route.id]">Editar</button>
+        </td>
+        <td>
+          <button class="btn btn-danger btn-sm" (click)="deleteRoute(route)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

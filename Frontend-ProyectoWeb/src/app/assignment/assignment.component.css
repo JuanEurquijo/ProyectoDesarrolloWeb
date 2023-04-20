@@ -1,0 +1,8 @@
+h1{
+  color: white;
+}
+
+:host ::ng-deep .p-card {
+  background-color: rgb(238, 232, 232);
+}
+

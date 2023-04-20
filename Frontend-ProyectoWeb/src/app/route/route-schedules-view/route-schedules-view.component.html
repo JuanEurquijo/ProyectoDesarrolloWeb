@@ -1,0 +1,36 @@
+<div class="container pt-5">
+  <h2>Horarios de la ruta</h2>
+</div>
+<ng-container *ngIf="schedules.length > 0; else noRoutes">
+<p-table [value]="schedules" [tableStyle]="{ 'min-width': '50rem' }" class="flex justify-content-center">
+  <ng-template pTemplate="header">
+      <tr>
+          <th>Día</th>
+          <th>Hora de Inicio</th>
+          <th>Hora de Fin</th>
+          <th>Editar</th>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-schedule>
+      <tr>
+          <td>{{ schedule.assignedDay }}</td>
+          <td>{{ schedule.startTime | date:'shortTime' }}</td>
+          <td>{{ schedule.endTime | date:'shortTime' }}</td>
+          <td>
+            <button pButton type="submit" [routerLink]="['/route', routeId, 'schedules', 'edit', schedule.id]">Editar</button>
+        </td>
+      </tr>
+  </ng-template>
+</p-table>
+</ng-container>
+<div class="flex justify-content-center">
+  <button type="button" class="btn btn-danger mt-5" (click)="goBack()">Salir</button>
+</div>
+<ng-template #noRoutes>
+  <div class="text-center">
+    <p>No hay horarios assignados a la ruta.</p>
+  </div>
+</ng-template>
+
+
+

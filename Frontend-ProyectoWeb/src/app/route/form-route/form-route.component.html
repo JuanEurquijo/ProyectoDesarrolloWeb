@@ -1,0 +1,26 @@
+<h2 class="m-5 text-center">{{title}}</h2>
+<p-card class="flex justify-content-center card-margin">
+  <form [formGroup]="routeForm" (submit)="onSubmit()">
+
+    <div class="p-float-label mb-5">
+      <input id="phone" type="text" size="35" formControlName="code" class="p-input" pInputText />
+      <label for="phone">Código</label>
+      <div *ngIf="routeForm.controls.code.errors?.['pattern']" class="alert">
+        El codigo deber ser de la forma A-11
+      </div>
+    </div>
+
+    <p-multiSelect [options]="stations" optionLabel="name" formControlName="selectedStations"
+      placeholder="Seleccione una o varias estaciones" class="p-input row ms-0 mb-5"></p-multiSelect>
+
+
+    <div class="d-flex justify-content-center mt-5">
+      <div class="my-2">
+        <button pButton type="submit" [disabled]="!routeForm.valid">Guardar</button>
+        <button pButton type="button" (click)="redirect()" class="p-button-danger ms-3">Cancelar</button>
+      </div>
+    </div>
+
+  </form>
+</p-card>
+

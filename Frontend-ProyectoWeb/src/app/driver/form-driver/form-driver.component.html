@@ -1,0 +1,49 @@
+<h2 class="m-5 text-center">{{title}}</h2>
+<p-card class="flex justify-content-center">
+<form [formGroup]="driverForm" (ngSubmit)="onSubmit()">
+
+
+    <div class="p-float-label mb-5">
+        <input id="name" type="text" size="35"  formControlName="name" pInputText/>
+        <label for="name" class="block">Nombres</label>
+    </div>
+
+    <div class="p-float-label mb-5">
+      <input id="lastName" type="text" size="35"  formControlName="lastName" pInputText/>
+        <label for="lastName">Apellidos</label>
+    </div>
+
+    <div class="p-float-label mb-5">
+      <input id="identifier" type="text" size="35"  formControlName="identifier" pInputText/>
+        <label for="identifier">Cédula</label>
+        <div *ngIf="driverForm.controls.identifier.errors?.['minlength']" class="alert">
+          La cédula debe tener al menos 8 caracteres
+      </div>
+      <div *ngIf="driverForm.controls.identifier.errors?.['pattern']" class="alert">
+        La cédula deber ser numérico
+    </div>
+    </div>
+
+    <div class="p-float-label mb-5">
+        <input id="phone" type="text" size="35"  formControlName="phone" pInputText/>
+        <label for="phone">Teléfono</label>
+        <div *ngIf="driverForm.controls.phone.errors?.['minlength']" class="alert">
+          El teléfono debe tener al menos 10 caracteres
+    </div>
+      <div *ngIf="driverForm.controls.phone.errors?.['pattern']" class="alert">
+          El télefono deber ser numérico
+    </div>
+    </div>
+
+    <div class="p-float-label mb-5">
+        <input id="address" type="text" size="35" formControlName="address" pInputText/>
+        <label for="address">Dirección</label>
+    </div>
+
+    <div class="text-center">
+    <button pButton type="submit" [disabled]="!driverForm.valid">Guardar</button>
+    <button pButton type="button" (click)="redirect()" class="p-button-danger ms-4">Cancelar</button>
+    </div>
+
+</form>
+</p-card>

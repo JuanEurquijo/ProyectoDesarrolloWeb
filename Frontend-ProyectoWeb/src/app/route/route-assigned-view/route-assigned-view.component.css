@@ -1,0 +1,13 @@
+.p-boxes {
+  width: 200px;
+}
+
+h2{
+  color: white;
+}
+
+:host ::ng-deep .p-card {
+  background-color: rgb(238, 232, 232);
+}
+
+
