@@ -115,5 +115,59 @@ public class Driver {
         this.asociations = asociations;
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+        result = prime * result + ((identifier == null) ? 0 : identifier.hashCode());
+        result = prime * result + ((phone == null) ? 0 : phone.hashCode());
+        result = prime * result + ((address == null) ? 0 : address.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Driver other = (Driver) obj;
+        if (name == null) {
+            if (other.name != null)
+                return false;
+        } else if (!name.equals(other.name))
+            return false;
+        if (lastName == null) {
+            if (other.lastName != null)
+                return false;
+        } else if (!lastName.equals(other.lastName))
+            return false;
+        if (identifier == null) {
+            if (other.identifier != null)
+                return false;
+        } else if (!identifier.equals(other.identifier))
+            return false;
+        if (phone == null) {
+            if (other.phone != null)
+                return false;
+        } else if (!phone.equals(other.phone))
+            return false;
+        if (address == null) {
+            if (other.address != null)
+                return false;
+        } else if (!address.equals(other.address))
+            return false;
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Driver [name=" + name + ", lastName=" + lastName + ", identifier=" + identifier + ", phone=" + phone
+                + ", address=" + address + "]";
+    }
 
 }

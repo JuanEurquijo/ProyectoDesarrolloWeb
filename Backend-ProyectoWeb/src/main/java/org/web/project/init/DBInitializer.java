@@ -12,6 +12,7 @@ import javax.transaction.Transactional;
 import org.apache.commons.text.RandomStringGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.web.project.model.Bus;
 import org.web.project.model.Driver;
@@ -24,6 +25,8 @@ import org.web.project.repository.RouteRepository;
 import org.web.project.repository.ScheduleRepository;
 import org.web.project.repository.StationRepository;
 
+
+@Profile("devel")
 @Component
 public class DBInitializer implements CommandLineRunner {
 
