@@ -73,7 +73,6 @@ public class RouteControllerIntegrationTest {
     @Test
     void getAllRoutes() throws Exception{
         ResponseEntity<Route[]> response = rest.getForEntity("http://localhost:" + port + "/api/route/list", Route[].class);
-        System.out.println("HOLAAA" + response.getBody());
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertArrayEquals(routes.toArray(), response.getBody());
     }
