@@ -73,4 +73,54 @@ public class Bus {
         this.asociations = asociations;
     }
 
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + ((plate == null) ? 0 : plate.hashCode());
+        result = prime * result + ((model == null) ? 0 : model.hashCode());
+        return result;
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Bus other = (Bus) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        if (plate == null) {
+            if (other.plate != null)
+                return false;
+        } else if (!plate.equals(other.plate))
+            return false;
+        if (model == null) {
+            if (other.model != null)
+                return false;
+        } else if (!model.equals(other.model))
+            return false;
+        return true;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Bus [id=" + id + ", plate=" + plate + ", model=" + model + "]";
+    }
+
+
+    
+
+    
+
 }

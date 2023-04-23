@@ -61,7 +61,7 @@ public class DriverController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("")
-    public Driver savePerson(@RequestBody Driver driver) {
+    public Driver saveDriver(@RequestBody Driver driver) {
         log.info("Saved driver {}", driver.getName());
         return driverService.saveDriver(driver);
     }
