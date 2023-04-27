@@ -7,6 +7,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -47,7 +48,7 @@ public class DriverSystemTest {
         options.addArguments("--disable-gpu"); // applicable to windows os only
         options.addArguments("--disable-extensions"); // disabling extensions
         // options.setExperimentalOption("useAutomationExtension", false);
-        // options.addArguments("start-maximized"); // open Browser in maximized mode
+        options.addArguments("start-maximized"); // open Browser in maximized mode
         options.addArguments("--remote-allow-origins=*");
         System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\chromedriver.exe");
         this.browser = new ChromeDriver(options);
@@ -64,10 +65,8 @@ public class DriverSystemTest {
     }
 
     @Test
-    void list() {
+    void listDrivers() {
         browser.get(baseUrl + "/api/driver/list");
-        WebElement btnHeader = browser.findElement(By.id("btnNavBar"));
-        btnHeader.click();
         WebElement btnDrivers = browser.findElement(By.id("linkDrivers"));
         btnDrivers.click();
         wait.until(ExpectedConditions.numberOfElementsToBe(By.className("drivers"), 3));
@@ -77,6 +76,41 @@ public class DriverSystemTest {
         assertEquals("1234567890", drivers.get(0).findElements(By.className("table-text")).get(2).getText());
         assertEquals("11111111111", drivers.get(0).findElements(By.className("table-text")).get(3).getText());
         assertEquals("Calle 170", drivers.get(0).findElements(By.className("table-text")).get(4).getText());
+    }
+
+    @Test
+    void createDriver() {
+        browser.get(baseUrl + "/api/driver/create");
+        WebElement btnDrivers = browser.findElement(By.id("linkDrivers"));
+        btnDrivers.click();
+        WebElement btnDriver = browser.findElement(By.id("btnNewDriver"));
+        btnDriver.click();
+        WebElement nombre = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("name")));
+        nombre.sendKeys(Keys.TAB);
+        nombre.sendKeys("Pablo");
+        WebElement lastName = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("lastName")));
+        lastName.sendKeys(Keys.TAB);
+        lastName.sendKeys("Alzate");
+        WebElement identifier = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("identifier")));
+        identifier.sendKeys(Keys.TAB);
+        identifier.sendKeys("1111111111111");
+        WebElement phone = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("phone")));
+        phone.sendKeys("123456789010");
+        WebElement address = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("address")));
+        address.sendKeys("Colombia");
+        address.sendKeys(Keys.TAB);
+        address.sendKeys(Keys.ARROW_DOWN);
+        address.sendKeys(Keys.ARROW_DOWN);
+        address.sendKeys(Keys.ARROW_DOWN);
+        address.sendKeys(Keys.ARROW_DOWN);
+        WebElement btnSubmit = browser.findElement(By.id("btnSubmit"));
+        btnSubmit.click();
+        List<WebElement> drivers = browser.findElements(By.className("drivers"));
+        assertEquals(nombre, drivers.get(3).findElement(By.className("table-text")).getText());
+        assertEquals(lastName, drivers.get(3).findElements(By.className("table-text")).get(1).getText());
+        assertEquals(identifier, drivers.get(3).findElements(By.className("table-text")).get(2).getText());
+        assertEquals(phone, drivers.get(3).findElements(By.className("table-text")).get(3).getText());
+        assertEquals(address, drivers.get(3).findElements(By.className("table-text")).get(4).getText());
     }
 
 }
