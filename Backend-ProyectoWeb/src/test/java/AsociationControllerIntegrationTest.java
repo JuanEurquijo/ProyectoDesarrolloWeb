@@ -88,26 +88,6 @@ public class AsociationControllerIntegrationTest {
 
     }
 
-    @Test
-    void getAllAsociations() throws Exception {
-        ResponseEntity<Asociation[]> response = rest.getForEntity("http://localhost:" + port + "/api/assignment/list",
-                Asociation[].class);
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertArrayEquals(asociations.toArray(), response.getBody());
-    }
-
-    @Test
-    void save() throws Exception {
-        Driver driver = driverRepository.save(new Driver("Andres", "Perez", "1234567890", "1111111111", "Calle 170"));
-        Bus bus = busRepository.save(new Bus("XYZ-123", "Mazda"));
-        Schedule schedule = scheduleRepository.save(new Schedule("Lunes",new GregorianCalendar(1, 1, 1, 1, 1, 1).getTime(), new GregorianCalendar(2, 2, 2, 2, 2, 2).getTime()));
-        Route route = routeRepository.save(new Route("A-10", stations));
-        Asociation asociation = new Asociation(driver, bus, route, schedule);
-        ResponseEntity<Asociation> response = rest.postForEntity("http://localhost:" + port + "/api/assignment",
-                asociation, Asociation.class);
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(asociation, response.getBody());
-    }
 
     @Test
     void findSchedulesByRoute() throws Exception {

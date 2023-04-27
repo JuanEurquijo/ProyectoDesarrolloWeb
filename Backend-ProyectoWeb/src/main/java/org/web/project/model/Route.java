@@ -88,7 +88,6 @@ public class Route {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((code == null) ? 0 : code.hashCode());
         result = prime * result + ((stations == null) ? 0 : stations.hashCode());
         return result;
@@ -104,11 +103,6 @@ public class Route {
         if (getClass() != obj.getClass())
             return false;
         Route other = (Route) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
         if (code == null) {
             if (other.code != null)
                 return false;
@@ -125,11 +119,8 @@ public class Route {
 
     @Override
     public String toString() {
-        return "Route [id=" + id + ", code=" + code + ", stations=" + stations + "]";
+        return "Route [code=" + code + ", stations=" + stations + "]";
     }
-
-
-    
 
 
 }

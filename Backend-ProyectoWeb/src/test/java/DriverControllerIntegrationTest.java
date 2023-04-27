@@ -12,6 +12,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
@@ -81,6 +83,17 @@ public class DriverControllerIntegrationTest {
         System.out.println(driver);
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(driver, response.getBody());
+    }
+
+    @Test
+    void update() throws Exception {
+        Driver driverToUpdate = new Driver("Julian", "Perez", "1234567890", "11111111111", "Calle 170");
+        ResponseEntity<Driver> response = rest.exchange("http://localhost:" + port + "/api/driver/update/1",
+        HttpMethod.PUT,
+        new HttpEntity<>(driverToUpdate),
+        Driver.class);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(driverToUpdate, response.getBody());
     }
 
     @Test
