@@ -2,7 +2,7 @@
   <h1 class="title-color text-center">Listado de Conductores - Transmilenio</h1>
 </div>
 <div class="container">
-  <a class="btn btn-primary btn-sm my-4" routerLink="/driver/create" routerLinkActive="active">Nuevo Conductor</a>
+  <a id="btnNewDriver" class="btn btn-primary btn-sm my-4" routerLink="/driver/create" routerLinkActive="active">Nuevo Conductor</a>
 
   <table class="table table-bordered text-center margin-table table-style">
     <thead class="table-primary">
@@ -18,7 +18,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let driver of drivers">
+      <tr class="drivers" *ngFor="let driver of drivers">
         <td class="table-text">{{driver.name}}</td>
         <td class="table-text">{{driver.lastName}}</td>
         <td class="table-text">{{driver.identifier}}</td>

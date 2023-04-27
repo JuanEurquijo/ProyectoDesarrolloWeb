@@ -82,8 +82,8 @@ export class FormBusComponent implements OnInit {
       } else {
         this.busService.saveBus(newBus).subscribe();
       }
-      this.busService.findAll().subscribe()
-      this.redirect();
+      this.busService.findAll().subscribe(() =>
+      this.redirect())
     }
 
   }

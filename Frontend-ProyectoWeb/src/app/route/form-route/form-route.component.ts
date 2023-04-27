@@ -96,15 +96,16 @@ export class FormRouteComponent implements OnInit {
       } else {
         this.routeService.saveRoute(newRoute).subscribe();
       }
-      this.routeService.findAll().subscribe(routes => this.routes = routes);
-      this.redirect();
+      this.routeService.findAll().subscribe(() =>
+        this.redirect()
+      )
     }
 
   }
 
   redirect() {
     this.router.navigate(['/route/list']);
- 
+
   }
 
 }

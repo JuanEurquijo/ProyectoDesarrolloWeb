@@ -1,5 +1,5 @@
 <h2 class="m-5 text-center">{{title}}</h2>
-<p-card class="flex justify-content-center">
+<p-card class="margin-card" class="flex justify-content-center">
 <form [formGroup]="driverForm" (ngSubmit)="onSubmit()">
 
 
@@ -41,7 +41,7 @@
     </div>
 
     <div class="text-center">
-    <button pButton type="submit" [disabled]="!driverForm.valid">Guardar</button>
+    <button id="btnSubmit" pButton type="submit" [disabled]="!driverForm.valid">Guardar</button>
     <button pButton type="button" (click)="redirect()" class="p-button-danger ms-4">Cancelar</button>
     </div>
 

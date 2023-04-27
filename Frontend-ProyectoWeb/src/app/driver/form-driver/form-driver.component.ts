@@ -89,8 +89,10 @@ export class FormDriverComponent implements OnInit {
       } else {
         this.driverService.saveDriver(newDriver).subscribe();
       }
-      this.driverService.findAll().subscribe()
-      this.redirect();     
+      this.driverService.findAll().subscribe( () =>
+        this.redirect()
+      )
+           
     }
 
   }
