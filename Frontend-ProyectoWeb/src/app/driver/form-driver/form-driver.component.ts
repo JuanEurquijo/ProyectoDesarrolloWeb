@@ -85,14 +85,14 @@ export class FormDriverComponent implements OnInit {
 
     if (!this.alreadyExist) {
       if (this.driver.id) {
-        this.driverService.updateDriver(this.driver.id, newDriver).subscribe();
+        this.driverService.updateDriver(this.driver.id, newDriver).subscribe(() => {
+          this.redirect();
+        });
       } else {
-        this.driverService.saveDriver(newDriver).subscribe();
+        this.driverService.saveDriver(newDriver).subscribe(() => {
+          this.redirect();
+        });
       }
-      this.driverService.findAll().subscribe( () =>
-        this.redirect()
-      )
-           
     }
 
   }

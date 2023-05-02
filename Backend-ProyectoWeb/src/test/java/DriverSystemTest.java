@@ -50,6 +50,7 @@ public class DriverSystemTest {
         // options.setExperimentalOption("useAutomationExtension", false);
         options.addArguments("start-maximized"); // open Browser in maximized mode
         options.addArguments("--remote-allow-origins=*");
+        options.addArguments("--force-device-scale-factor=0.8");
         System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\chromedriver.exe");
         this.browser = new ChromeDriver(options);
 
@@ -66,7 +67,7 @@ public class DriverSystemTest {
 
     @Test
     void listDrivers() {
-        browser.get(baseUrl + "/api/driver/list");
+        browser.get(baseUrl + "/driver/list");
         WebElement btnDrivers = browser.findElement(By.id("linkDrivers"));
         btnDrivers.click();
         wait.until(ExpectedConditions.numberOfElementsToBe(By.className("drivers"), 3));
@@ -80,7 +81,7 @@ public class DriverSystemTest {
 
     @Test
     void createDriver() {
-        browser.get(baseUrl + "/api/driver/create");
+        browser.get(baseUrl + "/driver/create");
         WebElement btnDrivers = browser.findElement(By.id("linkDrivers"));
         btnDrivers.click();
         WebElement btnDriver = browser.findElement(By.id("btnNewDriver"));
@@ -98,19 +99,15 @@ public class DriverSystemTest {
         phone.sendKeys("123456789010");
         WebElement address = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("address")));
         address.sendKeys("Colombia");
-        address.sendKeys(Keys.TAB);
-        address.sendKeys(Keys.ARROW_DOWN);
-        address.sendKeys(Keys.ARROW_DOWN);
-        address.sendKeys(Keys.ARROW_DOWN);
-        address.sendKeys(Keys.ARROW_DOWN);
         WebElement btnSubmit = browser.findElement(By.id("btnSubmit"));
         btnSubmit.click();
+        wait.until(ExpectedConditions.numberOfElementsToBe(By.className("drivers"), 4));
         List<WebElement> drivers = browser.findElements(By.className("drivers"));
-        assertEquals(nombre, drivers.get(3).findElement(By.className("table-text")).getText());
-        assertEquals(lastName, drivers.get(3).findElements(By.className("table-text")).get(1).getText());
-        assertEquals(identifier, drivers.get(3).findElements(By.className("table-text")).get(2).getText());
-        assertEquals(phone, drivers.get(3).findElements(By.className("table-text")).get(3).getText());
-        assertEquals(address, drivers.get(3).findElements(By.className("table-text")).get(4).getText());
+        assertEquals("Pablo", drivers.get(3).findElement(By.className("table-text")).getText());
+        assertEquals("Alzate", drivers.get(3).findElements(By.className("table-text")).get(1).getText());
+        assertEquals("1111111111111", drivers.get(3).findElements(By.className("table-text")).get(2).getText());
+        assertEquals("123456789010", drivers.get(3).findElements(By.className("table-text")).get(3).getText());
+        assertEquals("Colombia", drivers.get(3).findElements(By.className("table-text")).get(4).getText());
     }
 
 }

@@ -37,7 +37,7 @@ public class BusControllerIntegrationTest {
     private int port;
 
     @Autowired
-    BusRepository busdRepository;
+    BusRepository busRepository;
 
     @Autowired
     private TestRestTemplate rest;
@@ -47,9 +47,9 @@ public class BusControllerIntegrationTest {
 
     @BeforeEach
     void init() {
-        Bus b1 = busdRepository.save(new Bus("XYZ-101","Mazda"));
-        Bus b2 = busdRepository.save(new Bus("XYZ-102","Nissan"));
-        Bus b3 = busdRepository.save(new Bus("XYZ-103","Toyota"));
+        Bus b1 = busRepository.save(new Bus("XYZ-101","Mazda"));
+        Bus b2 = busRepository.save(new Bus("XYZ-102","Nissan"));
+        Bus b3 = busRepository.save(new Bus("XYZ-103","Toyota"));
 
         buses.add(b1);
         buses.add(b2);
@@ -83,10 +83,10 @@ public class BusControllerIntegrationTest {
 
     @Test
     void delete() throws Exception {
-        Bus bus = busdRepository.save(new Bus("XYZ-101","Mazda"));
+        Bus bus = busRepository.save(new Bus("XYZ-101","Mazda"));
         Long busId = bus.getId();
         rest.delete("http://localhost:" + port + "/api/bus/delete/"+busId);
-        assertFalse(busdRepository.findById(busId).isPresent());
+        assertFalse(busRepository.findById(busId).isPresent());
     }
     
 }

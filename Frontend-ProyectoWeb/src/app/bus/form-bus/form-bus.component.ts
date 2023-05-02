@@ -78,12 +78,14 @@ export class FormBusComponent implements OnInit {
 
     if (!this.alreadyExist) {
       if (this.bus.id) {
-        this.busService.updateBus(this.bus.id, newBus).subscribe();
+        this.busService.updateBus(this.bus.id, newBus).subscribe(() => {
+          this.redirect();
+        });
       } else {
-        this.busService.saveBus(newBus).subscribe();
+        this.busService.saveBus(newBus).subscribe(() => {
+          this.redirect();
+        });
       }
-      this.busService.findAll().subscribe(() =>
-      this.redirect())
     }
 
   }

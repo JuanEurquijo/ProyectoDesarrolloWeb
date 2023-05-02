@@ -6,19 +6,19 @@
   <form [formGroup]="assignmentForm" (submit)="onSubmit()">
 
     <div class="flex justify-content-center">
-      <p-dropdown [options]="drivers" optionLabel="name" formControlName="selectedDriver"
+      <p-dropdown id="selectedDriver" [options]="drivers" optionLabel="name" formControlName="selectedDriver"
         placeholder="Selecciona el conductor" class="p-input me-3"></p-dropdown>
 
-      <p-dropdown [options]="buses" optionLabel="plate" formControlName="selectedBus" placeholder="Selecciona el bus"
+      <p-dropdown id="selectedBus" [options]="buses" optionLabel="plate" formControlName="selectedBus" placeholder="Selecciona el bus"
         class="p-input me-3"></p-dropdown>
 
-      <p-dropdown [options]="routes" optionLabel="code" formControlName="selectedRoute" placeholder="Selecciona la ruta"
+      <p-dropdown id="selectedRoute" [options]="routes" optionLabel="code" formControlName="selectedRoute" placeholder="Selecciona la ruta"
         class="p-input me-3"></p-dropdown>
 
     </div>
 
     <div class="mt-3 justify-content-center">
-      <p-dropdown [options]="scheduleDays" formControlName="selectedDay"
+      <p-dropdown id="selectedDay" [options]="scheduleDays" formControlName="selectedDay"
         placeholder="Selecciona el día del horario" class="me-3"></p-dropdown>
 
       <p-calendar id="startTime" [showIcon]="true" [timeOnly]="true" formControlName="startTime" placeholder="Hora de Inicio" class="me-3"></p-calendar>
@@ -28,7 +28,7 @@
     </div>
 
     <div class="text-center mt-3">
-      <button pButton type="submit" [disabled]="!assignmentForm.valid">Guardar</button>
+      <button id="btnAssigment" pButton type="submit" [disabled]="!assignmentForm.valid">Guardar</button>
     </div>
 
   </form>

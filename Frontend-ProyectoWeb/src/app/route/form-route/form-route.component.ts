@@ -92,20 +92,20 @@ export class FormRouteComponent implements OnInit {
 
     if (!this.alreadyExist) {
       if (this.route.id) {
-        this.routeService.updateRoute(this.route.id!, newRoute).subscribe()
+        this.routeService.updateRoute(this.route.id!, newRoute).subscribe(() => {
+          this.redirect();
+        })
       } else {
-        this.routeService.saveRoute(newRoute).subscribe();
+        this.routeService.saveRoute(newRoute).subscribe(() => {
+          this.redirect();
+        })
       }
-      this.routeService.findAll().subscribe(() =>
-        this.redirect()
-      )
     }
 
   }
 
   redirect() {
     this.router.navigate(['/route/list']);
-
   }
 
 }
