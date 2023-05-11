@@ -43,20 +43,17 @@ public class AsociationController {
     private DriverService driverService;
 
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/list")
     public List<Asociation> getAllDrivers() {
         return asociationService.getAllAsociations();
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("")
     public Asociation saveAssignment(@RequestBody Asociation asociation) {
         log.info("Saved assignment");
         return asociationService.saveAssignment(asociation);
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping("/update/{id}")
     public Asociation updateDriver(@PathVariable Long id, @RequestBody Asociation asociation) {
         log.info("Updating assignment {}", asociation.getId());
@@ -76,7 +73,6 @@ public class AsociationController {
     }
 
     
-    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/{id}/schedules")
     public List<Schedule> findSchedulesByRoute(@PathVariable Long id) {
         log.info("Getting schedules by route");
@@ -86,7 +82,6 @@ public class AsociationController {
 
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/{id}/routes")
     public List<Route> findRoutesByBus(@PathVariable Long id) {
         log.info("Getting routes by bus");
@@ -97,7 +92,6 @@ public class AsociationController {
     }
 
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/{id}/buses")
     public List<Bus> findBusesByDriver(@PathVariable Long id) {
         log.info("Getting buses by driver");
@@ -107,7 +101,6 @@ public class AsociationController {
 
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/{id}/assignedBuses")
     public List<Bus> getAssignedBusesByRoute(@PathVariable Long id) {
         log.info("Getting buses by route");
@@ -118,7 +111,6 @@ public class AsociationController {
     }
 
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/{id}/assignedDrivers")
     public List<Driver> getAssignedDriversByBus(@PathVariable Long id) {
         log.info("Getting drivers by bus");
@@ -128,7 +120,6 @@ public class AsociationController {
 
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("bus/{idBus}/route/{idRoute}")
     public List<Schedule> finSchedulesByBusAndRoute(@PathVariable Long idBus, @PathVariable Long idRoute) {
         log.info("Getting schedules by bus {} and route {}", idBus, idRoute);

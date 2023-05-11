@@ -13,11 +13,12 @@ import { RouteStationsViewComponent } from './route/route-stations-view/route-st
 import { RouteSchedulesViewComponent } from './route/route-schedules-view/route-schedules-view.component';
 import { RouteScheduleEditComponent } from './route/route-schedule-edit/route-schedule-edit.component';
 import { AssignmentComponent } from './assignment/assignment.component';
+import { AuthGuard } from './guard/auth.guard';
 
 
 
 const routes: Routes = [
-  {path: 'home', component: HomeComponent },
+  {path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   {path: 'driver/list',component:DriverListComponent},
   {path: 'driver/create',component:FormDriverComponent},
   {path: 'driver/edit/:id', component: FormDriverComponent},

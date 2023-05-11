@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { DriversService } from './services/drivers.service';
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 
 import { AppComponent } from './app.component';
 import {InputTextModule} from 'primeng/inputtext';
@@ -34,6 +34,23 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouteStationsViewComponent } from './route/route-stations-view/route-stations-view.component';
 import { RouteSchedulesViewComponent } from './route/route-schedules-view/route-schedules-view.component';
 import { RouteScheduleEditComponent } from './route/route-schedule-edit/route-schedule-edit.component';
+
+
+function initializeKeycloak(keycloak: KeycloakService) {
+  return () =>
+    keycloak.init({
+      config: {
+        url: 'http://localhost:8180',
+        realm: 'DWRealm',
+        clientId: 'dw-app'
+      },
+      initOptions: {
+        onLoad: 'check-sso',
+        silentCheckSsoRedirectUri:
+          window.location.origin + '/assets/silent-check-sso.html'
+      }
+    });
+}
 
 @NgModule({
   declarations: [
@@ -68,9 +85,15 @@ import { RouteScheduleEditComponent } from './route/route-schedule-edit/route-sc
     ListboxModule,
     CalendarModule,
     TableModule,
-    HttpClientModule
+    HttpClientModule,
+    KeycloakAngularModule
   ],
-  providers: [DriversService],
+  providers: [{
+    provide: APP_INITIALIZER,
+    useFactory: initializeKeycloak,
+    multi: true,
+    deps: [KeycloakService]
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

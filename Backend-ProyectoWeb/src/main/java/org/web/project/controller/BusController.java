@@ -7,7 +7,6 @@ import org.web.project.service.BusService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,20 +25,17 @@ public class BusController {
     @Autowired
     private BusService busService;
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/list")
     public List<Bus> getAllBuses() {
         return busService.getAllBuses();
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/{id}")
     public Bus findBus(@PathVariable Long id) {
         log.info("Retrieving bus {}", id);
         return busService.findBus(id);
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping("/update/{id}")
     public Bus updateBus(@PathVariable Long id, @RequestBody Bus bus) {
         log.info("Updating bus {}", bus.getPlate());
@@ -56,14 +52,12 @@ public class BusController {
 
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("")
     public Bus saveBus(@RequestBody Bus bus) {
         log.info("Saved bus {}", bus.getPlate());
         return busService.saveBus(bus);
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping("/delete/{id}")
     public void deleteBus(@PathVariable Long id) {
         log.info("Deleting bus with id {}", id);
