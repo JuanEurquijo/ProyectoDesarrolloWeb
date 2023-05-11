@@ -3,6 +3,9 @@
 </div>
 <div class="container">
   <a class="btn btn-primary btn-sm my-4" routerLink="/route/create" routerLinkActive="active">Nueva Ruta</a>
+     <!-- <ng-container *ngIf=""> -->
+      <button pButton type="button" (click)="logout()" class="p-button-danger btn-sm my-4">Cerrar Sesión</button>
+    <!-- </ng-container> -->
 
   <div>
     <input type="text" pInputText class="ms-0 mb-2" [(ngModel)]="searchQuery" placeholder="Buscar por código" (keyup)="search()">

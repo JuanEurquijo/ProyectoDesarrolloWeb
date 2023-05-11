@@ -43,7 +43,8 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
         super.configure(http);
         http
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/api/driver/list").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/api/route/list").hasRole("ADMINISTRATOR")
+                .antMatchers(HttpMethod.GET, "/api/driver/list").hasRole("COORDINATOR")
                 .anyRequest().denyAll();
         http.csrf().disable();
         http.cors();

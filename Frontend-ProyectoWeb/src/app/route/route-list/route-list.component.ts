@@ -6,6 +6,7 @@ import { Route } from 'src/app/model/route';
 import { AsociationService } from 'src/app/services/asociation.service';
 import { BusService } from 'src/app/services/bus.service';
 import { RouteService } from 'src/app/services/route.service';
+import { SecurityService } from 'src/app/services/security.service';
 
 @Component({
   selector: 'app-route-list',
@@ -23,7 +24,8 @@ export class RouteListComponent implements OnInit {
   constructor (private busService : BusService,
     private routeService: RouteService,
     private router: Router,
-    private assignmentService: AsociationService) {
+    private assignmentService: AsociationService,
+    private securityService: SecurityService) {
 
 
 
@@ -59,6 +61,11 @@ export class RouteListComponent implements OnInit {
       route.code!.toLowerCase().includes(this.searchQuery.toLowerCase())
     );
   }
+
+    
+ logout(){
+  this.securityService.logout();
+}
 
 
 

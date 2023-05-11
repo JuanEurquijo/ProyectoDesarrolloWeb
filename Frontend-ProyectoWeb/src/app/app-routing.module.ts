@@ -18,8 +18,8 @@ import { AuthGuard } from './guard/auth.guard';
 
 
 const routes: Routes = [
-  {path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-  {path: 'driver/list',component:DriverListComponent},
+  {path: 'home', component: HomeComponent},
+  {path: 'driver/list',component:DriverListComponent,canActivate: [AuthGuard]},
   {path: 'driver/create',component:FormDriverComponent},
   {path: 'driver/edit/:id', component: FormDriverComponent},
   {path: 'driver/:id/assignedBuses', component: BusAssignedViewComponent},
@@ -27,7 +27,7 @@ const routes: Routes = [
   {path: 'bus/create',component:FormBusComponent},
   {path: 'bus/edit/:id', component: FormBusComponent},
   {path: 'bus/:id/assignedRoutes', component: RouteAssignedViewComponent},
-  {path: 'route/list',component:RouteListComponent},
+  {path: 'route/list',component:RouteListComponent,canActivate: [AuthGuard]},
   {path: 'route/create',component:FormRouteComponent},
   {path: 'route/edit/:id', component: FormRouteComponent},
   {path: 'route/:id/stations', component: RouteStationsViewComponent},
