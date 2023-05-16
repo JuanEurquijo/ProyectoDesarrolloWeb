@@ -16,12 +16,9 @@ import org.springframework.security.web.authentication.session.SessionAuthentica
 
 @KeycloakConfiguration
 @ConditionalOnProperty(value = "keycloak.enabled", matchIfMissing = true)
-// https://stackoverflow.com/a/51671755
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
-    /**
-     * Registers the KeycloakAuthenticationProvider with the authentication manager.
-     */
+   
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(keycloakAuthenticationProvider());
@@ -43,8 +40,22 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
         super.configure(http);
         http
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/api/route/list").hasRole("ADMINISTRATOR")
-                .antMatchers(HttpMethod.GET, "/api/driver/list").hasRole("COORDINATOR")
+                .antMatchers(HttpMethod.GET, "/api/route/**").hasRole("ADMIN")
+                 .antMatchers(HttpMethod.POST, "/api/route/**").hasRole("ADMIN")
+                 .antMatchers(HttpMethod.PUT, "/api/route/**").hasRole("ADMIN")
+                 .antMatchers(HttpMethod.DELETE, "/api/route/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/api/driver/**").hasRole("COORDINATOR")
+                .antMatchers(HttpMethod.POST, "/api/driver/**").hasRole("COORDINATOR")
+                .antMatchers(HttpMethod.DELETE, "/api/driver/**").hasRole("COORDINATOR")
+                .antMatchers(HttpMethod.PUT, "/api/driver/**").hasRole("COORDINATOR")
+                .antMatchers(HttpMethod.GET, "/api/bus/**").hasRole("COORDINATOR")
+                .antMatchers(HttpMethod.POST, "/api/bus/**").hasRole("COORDINATOR")
+                .antMatchers(HttpMethod.DELETE, "/api/bus/delete/{id}").hasRole("COORDINATOR")
+                .antMatchers(HttpMethod.PUT, "/api/bus/**").hasRole("COORDINATOR")
+                .antMatchers(HttpMethod.GET, "/api/route/list").hasRole("COORDINATOR")
+                .antMatchers(HttpMethod.GET, "/api/assignment/{id}/assignedDrivers").hasRole("COORDINATOR")
+                .antMatchers(HttpMethod.GET, "/api/assignment/****").hasRole("COORDINATOR")
+                .antMatchers(HttpMethod.DELETE, "/api/assignment/****").hasRole("COORDINATOR")
                 .anyRequest().denyAll();
         http.csrf().disable();
         http.cors();

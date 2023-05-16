@@ -25,7 +25,7 @@ export class AssignmentComponent implements OnInit {
   routes: Route[];
   schedule: Schedule;
   newAssignment: Assignment;
-  assignments: Assignment[];
+  assignments: Assignment[]=[];
   scheduleDays = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo']
   existSchedule:boolean = true
 

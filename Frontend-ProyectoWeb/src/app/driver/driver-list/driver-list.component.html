@@ -1,3 +1,4 @@
+<ng-container *ngIf="!hasRoleAdmin; else noAuthorization">
 <div class="container pt-5">
   <h1 class="title-color text-center">Listado de Conductores - Transmilenio</h1>
 </div>
@@ -37,3 +38,9 @@
     </tbody>
   </table>
 </div>
+</ng-container>
+<ng-template #noAuthorization>
+  <div class="text-center">
+    <p>No puede acceder a este contenido.</p>
+  </div>
+</ng-template>

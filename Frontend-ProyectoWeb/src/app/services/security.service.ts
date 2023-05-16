@@ -14,10 +14,8 @@ export class SecurityService {
     this.keycloakService.logout("http://localhost:4200/");
   }
 
-  userData() {
-    console.log(this.keycloakService.isUserInRole("ROLE_USER"));
-    console.log(this.keycloakService.getUserRoles());
-    console.log(this.keycloakService.loadUserProfile().then(console.log));
+  isUserInRole(role:string) {
+    return this.keycloakService.isUserInRole(role);
   }
 
 }

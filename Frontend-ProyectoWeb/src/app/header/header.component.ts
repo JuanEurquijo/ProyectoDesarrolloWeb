@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SecurityService } from '../services/security.service';
 
 
 
@@ -10,8 +11,12 @@ import { Component } from '@angular/core';
 export class HeaderComponent {
 
 
-  constructor(){
+  constructor(private securityService: SecurityService){
     
+  }
+
+  logout(){
+    this.securityService.logout();
   }
 
 }

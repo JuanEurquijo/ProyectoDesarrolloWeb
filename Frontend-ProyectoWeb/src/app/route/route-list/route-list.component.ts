@@ -18,7 +18,8 @@ export class RouteListComponent implements OnInit {
   routes: Route[];
   buses: Bus[];
   searchQuery = '';
-  filteredRoutes: Route[]=[]
+  filteredRoutes: Route[]=[];
+  hasRoleCoordinator: Boolean = false;
 
 
   constructor (private busService : BusService,
@@ -26,8 +27,6 @@ export class RouteListComponent implements OnInit {
     private router: Router,
     private assignmentService: AsociationService,
     private securityService: SecurityService) {
-
-
 
   }
 
@@ -37,6 +36,7 @@ export class RouteListComponent implements OnInit {
     });
     this.busService.findAll().subscribe(buses => this.buses = buses);
     this.filteredRoutes = this.routes;
+    this.hasRoleCoordinator = this.securityService.isUserInRole('ROLE_COORDINATOR');
   }
 
   deleteRoute(route: Route): void {
@@ -50,7 +50,6 @@ export class RouteListComponent implements OnInit {
             this.routes = this.routes.filter(r => r.id !== route.id);
           });
         }
-        location.reload();
       }
     });
   }

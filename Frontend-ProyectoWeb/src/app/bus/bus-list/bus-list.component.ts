@@ -6,6 +6,7 @@ import { BusService } from '../../services/bus.service';
 import { Router } from '@angular/router';
 import { Assignment } from 'src/app/model/assignment';
 import { AsociationService } from 'src/app/services/asociation.service';
+import { SecurityService } from 'src/app/services/security.service';
 
 @Component({
   selector: 'app-bus-list',
@@ -16,18 +17,21 @@ export class BusListComponent {
 
   buses: Bus[];
   drivers: Driver[];
+  hasRoleAdmin: Boolean = false;
 
   constructor (
     private busService: BusService,
     private driverService : DriversService,
     private router: Router,
-    private assignmentService: AsociationService) {
+    private assignmentService: AsociationService,
+    private securityService: SecurityService) {
 
   }
 
   ngOnInit(): void {
     this.busService.findAll().subscribe(buses => this.buses = buses);
     this.driverService.findAll().subscribe(drivers =>this.drivers = drivers);
+    this.hasRoleAdmin = this.securityService.isUserInRole('ROLE_ADMIN');
 
   }
 
@@ -42,7 +46,6 @@ export class BusListComponent {
             this.buses = this.buses.filter(b => b.id !== bus.id);
           });
       }
-        location.reload();
       }
     });
   }

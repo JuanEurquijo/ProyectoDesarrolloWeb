@@ -1,10 +1,11 @@
+<ng-container *ngIf="!hasRoleCoordinator; else noAuthorization">
 <div class="container pt-5">
   <h1 class="title-color text-center">Listado de Rutas - Transmilenio</h1>
 </div>
 <div class="container">
   <a class="btn btn-primary btn-sm my-4" routerLink="/route/create" routerLinkActive="active">Nueva Ruta</a>
      <!-- <ng-container *ngIf=""> -->
-      <button pButton type="button" (click)="logout()" class="p-button-danger btn-sm my-4">Cerrar Sesión</button>
+      <!-- <button pButton type="button" (click)="logout()" class="p-button-danger btn-sm my-4">Cerrar Sesión</button> -->
     <!-- </ng-container> -->
 
   <div>
@@ -40,3 +41,9 @@
     </tbody>
   </table>
 </div>
+</ng-container>
+<ng-template #noAuthorization>
+  <div class="text-center">
+    <p>No puede acceder a este contenido.</p>
+  </div>
+</ng-template>
