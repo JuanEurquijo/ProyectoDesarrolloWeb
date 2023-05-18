@@ -34,6 +34,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouteStationsViewComponent } from './route/route-stations-view/route-stations-view.component';
 import { RouteSchedulesViewComponent } from './route/route-schedules-view/route-schedules-view.component';
 import { RouteScheduleEditComponent } from './route/route-schedule-edit/route-schedule-edit.component';
+import { RouteConsultComponent } from './route/route-consult/route-consult.component';
 
 
 function initializeKeycloak(keycloak: KeycloakService) {
@@ -69,7 +70,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     RouteStationsViewComponent,
     RouteSchedulesViewComponent,
     RouteScheduleEditComponent,
-    AssignmentComponent
+    AssignmentComponent,
+    RouteConsultComponent
   ],
   imports: [
     BrowserModule,

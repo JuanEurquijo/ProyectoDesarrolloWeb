@@ -14,6 +14,7 @@ import { RouteSchedulesViewComponent } from './route/route-schedules-view/route-
 import { RouteScheduleEditComponent } from './route/route-schedule-edit/route-schedule-edit.component';
 import { AssignmentComponent } from './assignment/assignment.component';
 import { AuthGuard } from './guard/auth.guard';
+import { RouteConsultComponent } from './route/route-consult/route-consult.component';
 
 
 
@@ -23,7 +24,7 @@ const routes: Routes = [
   {path: 'driver/create',component:FormDriverComponent},
   {path: 'driver/edit/:id', component: FormDriverComponent},
   {path: 'driver/:id/assignedBuses', component: BusAssignedViewComponent},
-  {path: 'bus/list',component:BusListComponent},
+  {path: 'bus/list',component:BusListComponent,canActivate: [AuthGuard]},
   {path: 'bus/create',component:FormBusComponent},
   {path: 'bus/edit/:id', component: FormBusComponent},
   {path: 'bus/:id/assignedRoutes', component: RouteAssignedViewComponent},
@@ -34,6 +35,7 @@ const routes: Routes = [
   {path: 'route/:id/schedules', component: RouteSchedulesViewComponent},
   {path: 'route/:id/schedules/edit/:scheduleId', component: RouteScheduleEditComponent},
   {path: 'assignment', component: AssignmentComponent},
+  {path: 'route/consult/list', component: RouteConsultComponent},
   {path: '', pathMatch: 'full', redirectTo: '/home'}
 ]
 

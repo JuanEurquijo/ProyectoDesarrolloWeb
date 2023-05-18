@@ -18,4 +18,8 @@ export class SecurityService {
     return this.keycloakService.isUserInRole(role);
   }
 
+  isLogged() {
+    return this.keycloakService.isLoggedIn();
+  }
+
 }

@@ -49,6 +49,7 @@ export class RouteListComponent implements OnInit {
           this.routeService.deleteRoute(route.id!).subscribe(() => {
             this.routes = this.routes.filter(r => r.id !== route.id);
           });
+          location.reload();
         }
       }
     });

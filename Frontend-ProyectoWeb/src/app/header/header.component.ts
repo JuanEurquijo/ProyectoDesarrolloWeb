@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SecurityService } from '../services/security.service';
 
 
@@ -8,13 +8,17 @@ import { SecurityService } from '../services/security.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit{
 
-
+  isLogged: Boolean = false
   constructor(private securityService: SecurityService){
     
   }
-
+   //TOOO: REVISAR VARIABLE ISLOGGED
+  ngOnInit(): void {
+    this.securityService.isLogged().then(b => this.isLogged = b);
+  }
+   
   logout(){
     this.securityService.logout();
   }

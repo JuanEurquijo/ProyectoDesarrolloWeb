@@ -25,7 +25,10 @@
                   <a class="nav-link active" routerLink="route/list">Rutas</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" routerLink="assignment">Asignación</a>
+                <a class="nav-link active" *ngIf="!isLogged" routerLink="assignment">Asignación</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" routerLink="route/consult/list">Consultar Rutas</a>
             </li>
           </ul>
       </div>

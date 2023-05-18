@@ -1,7 +1,7 @@
-<div class="container pt-5">
-  <h2>Horarios de la ruta</h2>
-</div>
 <ng-container *ngIf="schedules.length > 0; else noRoutes">
+<div class="container pt-5">
+  <h2 class="text-center">Horarios de la ruta</h2>
+</div>
 <p-table [value]="schedules" [tableStyle]="{ 'min-width': '50rem' }" class="flex justify-content-center">
   <ng-template pTemplate="header">
       <tr>
@@ -27,8 +27,8 @@
   <button type="button" class="btn btn-danger mt-5" (click)="goBack()">Salir</button>
 </div>
 <ng-template #noRoutes>
-  <div class="text-center">
-    <p>No hay horarios assignados a la ruta.</p>
+  <div class="text-center title-permission">
+    <h3>No hay horarios assignados a la ruta.</h3>
   </div>
 </ng-template>
 
