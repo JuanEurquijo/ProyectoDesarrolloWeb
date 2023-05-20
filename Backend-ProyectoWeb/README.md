@@ -6,4 +6,6 @@ This example requires to first install keycloak and run it with the following co
 ```
 
 Run backend with develop profile
+```
 .\mvnw spring-boot:run -Dspring-boot.run.profiles=devel
+```
