@@ -10,15 +10,17 @@ import { SecurityService } from '../services/security.service';
 })
 export class HeaderComponent implements OnInit{
 
-  isLogged: Boolean = false
+  isLoggedIn$: Promise<boolean>;
+
   constructor(private securityService: SecurityService){
-    
+
   }
-   //TOOO: REVISAR VARIABLE ISLOGGED
+
   ngOnInit(): void {
-    this.securityService.isLogged().then(b => this.isLogged = b);
+    this.isLoggedIn$ = this.securityService.isLogged();
   }
-   
+
+
   logout(){
     this.securityService.logout();
   }

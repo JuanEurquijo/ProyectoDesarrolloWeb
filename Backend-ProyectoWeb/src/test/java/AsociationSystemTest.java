@@ -5,10 +5,13 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,7 +84,7 @@ public class AsociationSystemTest {
         System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\chromedriver.exe");
         this.browser = new ChromeDriver(options);
 
-        this.wait = new WebDriverWait(browser, java.time.Duration.ofSeconds(50));
+        this.wait = new WebDriverWait(browser, java.time.Duration.ofSeconds(10));
 
         this.baseUrl = "http://localhost:4200";
 
@@ -89,31 +92,66 @@ public class AsociationSystemTest {
 
     @AfterEach
     void end() {
-        browser.quit();
+       browser.quit();
     }
 
     @Test
     void createAssignment() {
-        browser.get(baseUrl + "/assignment");
-        // selectOptionFromDropdown(browser, "selectedDriver", "Pepe");
-        // selectOptionFromDropdown(browser, "selectedBus", "XYZ-101");
-        // selectOptionFromDropdown(browser, "selectedRoute", "A-10");
-        // selectOptionFromDropdown(browser, "selectedDay", "Lunes");
+        browser.get(baseUrl + "/route/list");
+         WebElement user = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("username")));
+         user.sendKeys("administrator");
+         user.sendKeys(Keys.TAB);
+         WebElement pass = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("password")));
+         pass.sendKeys("admin123");
+         WebElement btnLogin = browser.findElement(By.id("kc-login"));
+         btnLogin.click();
+         wait.until(new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                // Verificar si la información está presente en la base de datos
+                return driverRepository.count() > 0 && busRepository.count() > 0 && stationRepository.count() > 0;
+            }
+        });
+         wait.until(ExpectedConditions.numberOfElementsToBe(By.className("routes"), 1));
+         WebElement btnAssign = browser.findElement(By.id("assignId"));
+         btnAssign.click();
+        selectOptionFromDropdown(browser, "selectedDriver", "Pepe");
+        selectOptionFromDropdown(browser, "selectedBus", "XYZ-101");
+        selectOptionFromDropdown(browser, "selectedRoute", "A-10");
+        selectOptionFromDropdown(browser, "selectedDay", "Lunes");
+        WebElement startTime = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("startTime")));
+        startTime.click();
+        By arrowUpLocator = By.xpath("//span[contains(@class, 'pi pi-chevron-up ng-tns-c15-0')]");
+        wait.until(ExpectedConditions.elementToBeClickable(arrowUpLocator)).click();
+        WebElement endTime = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("endTime")));
+        endTime.click();
+        By arrowDownLocator = By.xpath("//span[contains(@class, 'pi pi-chevron-down ng-tns-c15-1')]");
+        wait.until(ExpectedConditions.elementToBeClickable(arrowDownLocator)).click();
+        WebElement btnSave = browser.findElement(By.id("btnAssignment"));
+        btnSave.click();
+        wait.until(ExpectedConditions.numberOfElementsToBe(By.className("assignments"), 1));
+
 
     }
 
     public void selectOptionFromDropdown(WebDriver browser, String dropdownId, String optionText) {
         WebElement dropdown = browser.findElement(By.id(dropdownId));
-        dropdown.click();
+        
+        Actions actions = new Actions(browser);
+        actions.moveToElement(dropdown).click().perform();
+        
         By optionLocator = By.xpath("//li[contains(@class, 'p-dropdown-item')]");
         wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(optionLocator));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(optionLocator));
         List<WebElement> options = browser.findElements(optionLocator);
+        
         for (WebElement option : options) {
             if (option.getText().equals(optionText)) {
-                option.click();
+                actions.moveToElement(option).click().perform();
                 break;
             }
         }
     }
+    
 
 }

@@ -5,6 +5,7 @@ import org.keycloak.adapters.springsecurity.config.KeycloakWebSecurityConfigurer
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -14,7 +15,9 @@ import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.web.authentication.session.RegisterSessionAuthenticationStrategy;
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
 
+
 @KeycloakConfiguration
+@Profile("devel")
 @ConditionalOnProperty(value = "keycloak.enabled", matchIfMissing = true)
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
@@ -40,6 +43,9 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
         super.configure(http);
         http
                 .authorizeRequests()
+                .antMatchers(HttpMethod.GET, "/api/assignment/{id}/schedules").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/route/list").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/route/{id}/stations").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/route/**").hasAnyRole("ADMIN","COORDINATOR")
                 .antMatchers(HttpMethod.POST, "/api/route/**").hasAnyRole("ADMIN")
                 .antMatchers(HttpMethod.PUT, "/api/route/update/{id}").hasAnyRole("ADMIN")

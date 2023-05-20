@@ -28,7 +28,7 @@
     </div>
 
     <div class="text-center mt-3">
-      <button id="btnAssigment" pButton type="submit" [disabled]="!assignmentForm.valid">Guardar</button>
+      <button id="btnAssignment" pButton type="submit" [disabled]="!assignmentForm.valid">Guardar</button>
     </div>
 
   </form>
@@ -46,7 +46,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let assign of assignments">
+        <tr class="assignments" *ngFor="let assign of assignments">
           <td class="table-text">{{assign.driver?.name}} {{assign.driver?.lastName}} - {{assign.driver?.identifier}}</td>
           <td class="table-text">{{assign.bus?.plate}}</td>
           <td class="table-text">{{assign.route?.code}}</td>

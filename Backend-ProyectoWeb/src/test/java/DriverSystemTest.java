@@ -54,7 +54,7 @@ public class DriverSystemTest {
         System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\chromedriver.exe");
         this.browser = new ChromeDriver(options);
 
-        this.wait = new WebDriverWait(browser, java.time.Duration.ofSeconds(10));
+        this.wait = new WebDriverWait(browser, java.time.Duration.ofSeconds(50));
 
         this.baseUrl = "http://localhost:4200";
 
@@ -68,8 +68,15 @@ public class DriverSystemTest {
     @Test
     void listDrivers() {
         browser.get(baseUrl + "/driver/list");
-        WebElement btnDrivers = browser.findElement(By.id("linkDrivers"));
-        btnDrivers.click();
+       //WebElement btnDrivers = browser.findElement(By.id("linkdrivers"));
+       //btnDrivers.click();
+        WebElement user = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("username")));
+        user.sendKeys("coordinator");
+        user.sendKeys(Keys.TAB);
+        WebElement pass = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("password")));
+        pass.sendKeys("coordinator123");
+        WebElement btnLogin = browser.findElement(By.id("kc-login"));
+        btnLogin.click();
         wait.until(ExpectedConditions.numberOfElementsToBe(By.className("drivers"), 3));
         List<WebElement> drivers = browser.findElements(By.className("drivers"));
         assertEquals("Pepe", drivers.get(0).findElement(By.className("table-text")).getText());
@@ -82,10 +89,10 @@ public class DriverSystemTest {
     @Test
     void createDriver() {
         browser.get(baseUrl + "/driver/create");
-        WebElement btnDrivers = browser.findElement(By.id("linkDrivers"));
-        btnDrivers.click();
-        WebElement btnDriver = browser.findElement(By.id("btnNewDriver"));
-        btnDriver.click();
+        //WebElement btnDrivers = browser.findElement(By.id("linkdrivers"));
+        //btnDrivers.click();
+        //WebElement btnDriver = browser.findElement(By.id("btnNewDriver"));
+        //btnDriver.click();
         WebElement nombre = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("name")));
         nombre.sendKeys(Keys.TAB);
         nombre.sendKeys("Pablo");
@@ -101,6 +108,13 @@ public class DriverSystemTest {
         address.sendKeys("Colombia");
         WebElement btnSubmit = browser.findElement(By.id("btnSubmit"));
         btnSubmit.click();
+        WebElement user = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("username")));
+        user.sendKeys("coordinator");
+        user.sendKeys(Keys.TAB);
+        WebElement pass = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("password")));
+        pass.sendKeys("coordinator123");
+        WebElement btnLogin = browser.findElement(By.id("kc-login"));
+        btnLogin.click();
         wait.until(ExpectedConditions.numberOfElementsToBe(By.className("drivers"), 4));
         List<WebElement> drivers = browser.findElements(By.className("drivers"));
         assertEquals("Pablo", drivers.get(3).findElement(By.className("table-text")).getText());

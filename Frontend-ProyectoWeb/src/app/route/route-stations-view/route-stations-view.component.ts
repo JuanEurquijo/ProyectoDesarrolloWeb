@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { Station } from 'src/app/model/station';
 import { RouteService } from 'src/app/services/route.service';
+import { SecurityService } from 'src/app/services/security.service';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class RouteStationsViewComponent implements OnInit {
   constructor(
     private routeService: RouteService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private securityService: SecurityService
   ) { }
 
   ngOnInit(): void {
@@ -29,6 +31,10 @@ export class RouteStationsViewComponent implements OnInit {
   }
 
   goBack(){
-    this.router.navigate([`/route/list`]);
+    if(this.securityService.isUserInRole("ROLE_ADMIN")){
+      this.router.navigate([`/route/list`]);
+    }else{
+      this.router.navigate([`/route/consult/list`]);
+    }
   }
 }

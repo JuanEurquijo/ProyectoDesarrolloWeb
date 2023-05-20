@@ -1,1 +1,31 @@
-<p>route-consult works!</p>
+<div class="container pt-5">
+  <h1 class="title-color text-center">Listado de Rutas - Transmilenio</h1>
+</div>
+<div class="container">
+  <div>
+    <input type="text" pInputText class="ms-0 mb-2 my-4" [(ngModel)]="searchQuery" placeholder="Buscar por código"
+      (keyup)="search()">
+  </div>
+
+  <table class="table table-bordered text-center margin-table table-style">
+    <thead class="table-primary">
+      <tr>
+        <th scope="col">Código</th>
+        <th scope="col">Estaciones</th>
+        <th scope="col">Horario</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let route of filteredRoutes">
+        <td class="table-text">{{route.code}}</td>
+        <td>
+          <button class="btn btn-info btn-sm" [routerLink]="['/route', route.id,'stations']">Ver Estaciones</button>
+        </td>
+        <td>
+          <button class="btn btn-info btn-sm" [routerLink]="['/route', route.id,'schedules']">Ver Horario
+            Asignado</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

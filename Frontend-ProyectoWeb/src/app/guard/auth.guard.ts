@@ -14,6 +14,7 @@ export class AuthGuard extends KeycloakAuthGuard {
     super(router, keycloak);
   }
 
+
   override async isAccessAllowed(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Promise<boolean | UrlTree> {

@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { switchMap } from 'rxjs';
 import { Assignment } from 'src/app/model/assignment';
 import { Schedule } from 'src/app/model/schedule';
 import { AsociationService } from 'src/app/services/asociation.service';
-import { RouteService } from 'src/app/services/route.service';
+import { SecurityService } from 'src/app/services/security.service';
 
 
 @Component({
@@ -17,10 +16,10 @@ export class RouteSchedulesViewComponent implements OnInit {
   schedule: Schedule;
   routeId: number;
   assignments: Assignment[] = [];
-
+  isLoggedIn$: Promise<boolean>;
 
   constructor(
-    private routeService: RouteService,
+    private securityService: SecurityService,
     private route: ActivatedRoute,
     private router: Router,
     private assignmentService: AsociationService) { }
@@ -29,6 +28,7 @@ export class RouteSchedulesViewComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.routeId = params['id'] || null;
     })
+    this.isLoggedIn$ = this.securityService.isLogged();
     this.show()
   }
 
@@ -39,6 +39,7 @@ export class RouteSchedulesViewComponent implements OnInit {
 
 
   goBack() {
-    this.router.navigate([`/route/list`]);
+    window.history.back();
+    this.router.navigateByUrl(this.router.url);
   }
 }

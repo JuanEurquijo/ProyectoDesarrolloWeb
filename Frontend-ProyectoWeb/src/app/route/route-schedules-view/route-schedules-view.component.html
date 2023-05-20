@@ -8,7 +8,7 @@
           <th>Día</th>
           <th>Hora de Inicio</th>
           <th>Hora de Fin</th>
-          <th>Editar</th>
+          <th *ngIf="isLoggedIn$ | async">Editar</th>
       </tr>
   </ng-template>
   <ng-template pTemplate="body" let-schedule>
@@ -16,7 +16,7 @@
           <td>{{ schedule.assignedDay }}</td>
           <td>{{ schedule.startTime | date:'shortTime' }}</td>
           <td>{{ schedule.endTime | date:'shortTime' }}</td>
-          <td>
+          <td  *ngIf="isLoggedIn$ | async" >
             <button pButton type="submit" [routerLink]="['/route', routeId, 'schedules', 'edit', schedule.id]">Editar</button>
         </td>
       </tr>

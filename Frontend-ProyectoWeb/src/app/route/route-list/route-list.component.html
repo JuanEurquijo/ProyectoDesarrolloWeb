@@ -4,10 +4,6 @@
 </div>
 <div class="container">
   <a class="btn btn-primary btn-sm my-4" routerLink="/route/create" routerLinkActive="active">Nueva Ruta</a>
-     <!-- <ng-container *ngIf=""> -->
-      <!-- <button pButton type="button" (click)="logout()" class="p-button-danger btn-sm my-4">Cerrar Sesión</button> -->
-    <!-- </ng-container> -->
-
   <div>
     <input type="text" pInputText class="ms-0 mb-2" [(ngModel)]="searchQuery" placeholder="Buscar por código" (keyup)="search()">
   </div>
@@ -23,7 +19,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let route of filteredRoutes">
+      <tr class="routes" *ngFor="let route of filteredRoutes">
         <td class="table-text">{{route.code}}</td>
         <td>
           <button class="btn btn-info btn-sm" [routerLink]="['/route', route.id,'stations']">Ver Estaciones</button>
