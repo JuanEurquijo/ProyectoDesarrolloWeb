@@ -1,0 +1,24 @@
+<h2 class="m-5 text-center">Rutas Asignadas al Bus</h2>
+<ng-container *ngIf="assignedRoutes.length > 0; else noRoutes">
+  <p-card class="flex justify-content-center">
+    <div class="row" *ngFor="let route of assignedRoutes">
+      <div class="col me-4">
+        <h5>Código</h5>
+        <input id="placa1" type="text" size="35" [(ngModel)]="route.code" [disabled]="true" pInputText/>
+      </div>
+      <div class="col me-4">
+        <h5>Estaciones</h5>
+        <p-listbox [options]="route.stations!" optionLabel="name" class="row mb-5 p-boxes"></p-listbox>
+      </div>
+      <div class="col ms-3">
+        <h5>Días Asignados</h5>
+        <p-listbox [options]="scheduleMap[route.id!]" optionLabel="assignedDay" class="row mb-5 p-boxes"></p-listbox>
+      </div>
+    </div>
+  </p-card>
+</ng-container>
+<ng-template #noRoutes>
+  <div class="text-center">
+    <p>No hay rutas asignadas al bus.</p>
+  </div>
+</ng-template>

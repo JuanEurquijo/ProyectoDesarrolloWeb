@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+      <a class="navbar-brand" routerLink="home">
+          <strong>Transmilenio</strong>
+      </a>
+      <button id="btnNavBar" class="navbar-toggler" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+          aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" routerLink="home" routerLinkActive="menuSelected"
+                    data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Inicio</a>
+              </li>
+              <li id="linkdrivers" class="nav-item">
+                  <a class="nav-link active" routerLink="driver/list" routerLinkActive="menuSelected"
+                    data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Conductores</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link active" routerLink="bus/list">Buses</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link active" routerLink="route/list">Rutas</a>
+              </li>
+              <li id="assignId" class="nav-item">
+                <a class="nav-link active" *ngIf="isLoggedIn$ | async" routerLink="assignment">Asignación</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" *ngIf="!(isLoggedIn$ | async)"  routerLink="route/consult/list">Consultar Rutas</a>
+            </li>
+          </ul>
+      </div>
+      <button pButton type="button" *ngIf="isLoggedIn$ | async" (click)="logout()" class="p-button-danger btn-sm my-4">Cerrar Sesión</button>
+  </div>
+</nav>

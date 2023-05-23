@@ -1,0 +1,26 @@
+<h2 class="m-5 text-center title-color">{{title}}</h2>
+<p-card class="flex justify-content-center">
+  <form [formGroup]="busForm" (ngSubmit)="onSubmit()">
+
+
+    <div class="p-float-label mb-5">
+      <input id="plate" type="text" size="35" formControlName="plate" pInputText />
+      <label for="plate">Placa</label>
+      <div *ngIf="busForm.controls.plate.errors?.['pattern']" class="alert">
+        La placa deber ser de la forma XYZ-123
+      </div>
+    </div>
+
+
+    <div class="p-float-label mb-5">
+      <input id="model" type="text" size="35" formControlName="model" pInputText />
+      <label for="model">Modelo</label>
+    </div>
+
+    <div class="text-center">
+      <button pButton type="submit" [disabled]="!busForm.valid">Guardar</button>
+      <button pButton type="button" (click)="redirect()" class="p-button-danger ms-4">Cancelar</button>
+    </div>
+
+  </form>
+</p-card>

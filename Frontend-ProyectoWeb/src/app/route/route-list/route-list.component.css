@@ -1,0 +1,9 @@
+.p-card-size {
+  min-height: 50px;
+}
+
+:host ::ng-deep .p-element {
+  width: 140px;
+  height: 32px;
+  margin-inline-start: 880px;
+}

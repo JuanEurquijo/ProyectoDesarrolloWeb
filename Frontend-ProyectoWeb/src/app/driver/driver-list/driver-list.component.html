@@ -1,0 +1,46 @@
+<ng-container *ngIf="!hasRoleAdmin; else noAuthorization">
+<div class="container pt-5">
+  <h1 class="title-color text-center">Listado de Conductores - Transmilenio</h1>
+</div>
+<div class="container">
+  <a id="btnNewDriver" class="btn btn-primary btn-sm my-4" routerLink="/driver/create" routerLinkActive="active">Nuevo Conductor</a>
+
+  <table class="table table-bordered text-center margin-table table-style">
+    <thead class="table-primary">
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">Cédula</th>
+        <th scope="col">Teléfono</th>
+        <th scope="col">Direccion</th>
+        <th scope="col">Buses Asignados</th>
+        <th scope="col">Editar</th>
+        <th scope="col">Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="drivers" *ngFor="let driver of drivers">
+        <td class="table-text">{{driver.name}}</td>
+        <td class="table-text">{{driver.lastName}}</td>
+        <td class="table-text">{{driver.identifier}}</td>
+        <td class="table-text">{{driver.phone}}</td>
+        <td class="table-text">{{driver.address}}</td>
+        <td>
+          <button class="btn btn-info btn-sm" [routerLink]="['/driver', driver.id,'assignedBuses']">Ver Buses</button>
+        </td>
+        <td>
+          <button class="btn btn-info btn-sm" [routerLink]="['/driver/edit', driver.id]">Editar</button>
+        </td>
+        <td>
+          <button class="btn btn-danger btn-sm" (click)="deleteDriver(driver)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</ng-container>
+<ng-template #noAuthorization>
+  <div class="title-color text-center title-permission">
+    <h3>No puede acceder a este contenido.</h3>
+  </div>
+</ng-template>

@@ -1,0 +1,42 @@
+/* You can add global styles to this file, and also import other style files */
+.margin-table{
+  margin-bottom: 100px;
+}
+
+.animated-bg {
+ background: linear-gradient(-45deg, #ee7752,#e73c7e,#9d53f1,#23d5ab);
+ background-size: 1000% 1000%;
+ animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.table-text{
+  color: white;
+}
+
+.table-style{
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  overflow:hidden;
+}
+
+.title-color{
+  color: white;
+}
+
+.title-permission{
+  color: white;
+  margin-top: 30px;
+}
+

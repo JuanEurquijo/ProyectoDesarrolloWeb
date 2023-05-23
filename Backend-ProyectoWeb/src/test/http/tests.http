@@ -1,0 +1,68 @@
+@hostname = localhost
+@port = 8080
+@base_url = http://{{hostname}}:{{port}}
+@kc_hostname = localhost
+@kc_port = 8180
+@kc_base_url = http://{{kc_hostname}}:{{kc_port}}
+@kc_realm = DWRealm
+@kc_client_id = dw-app
+@username = user1
+@password = user123
+
+@username2 = admin1
+@password2 = admin123
+
+
+
+
+######################### Login User ###########################
+# @name login
+
+POST {{kc_base_url}}/realms/{{kc_realm}}/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+client_id={{kc_client_id}}&username={{username}}&password={{password}}&grant_type=password
+
+
+######################### Login Admin ###########################
+# @name login
+
+POST {{kc_base_url}}/realms/{{kc_realm}}/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+client_id={{kc_client_id}}&username={{username2}}&password={{password2}}&grant_type=password
+
+
+
+######################### Get driver list  ############1###############
+@token = {{login.response.body.$.access_token}}
+
+GET {{base_url}}/api/driver/list
+Authorization: Bearer {{token}}
+
+######################### Get roles ###########################
+GET {{base_url}}/user/roles
+Authorization: Bearer {{token}}
+
+
+######################### Logout ###########################
+# Nota: para JWT "puro", logout no funciona
+@refresh_token = {{login.response.body.$.refresh_token}}
+
+POST {{kc_base_url}}/realms/{{kc_realm}}/protocol/openid-connect/logout
+Authorization: Bearer {{token}}
+Content-Type: application/x-www-form-urlencoded
+
+client_id={{kc_client_id}}&refresh_token={{refresh_token}}
+
+######################### Refresh token ###########################
+# Nota: para JWT "puro", logout no funciona
+# @name login
+
+@refresh_token = {{login.response.body.$.refresh_token}}
+
+
+POST {{kc_base_url}}/realms/{{kc_realm}}/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+client_id={{kc_client_id}}&grant_type=refresh_token&refresh_token={{refresh_token}}

@@ -1,0 +1,21 @@
+:host ::ng-deep .p-datatable {
+  margin-top: 40px;
+}
+
+.align-btn {
+  justify-content: center;
+}
+
+h2{
+  color:white;
+}
+
+:host ::ng-deep .p-datatable-table {
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgb(238, 232, 232);
+
+}
+
+
+
