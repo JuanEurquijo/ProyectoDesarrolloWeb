@@ -74,10 +74,8 @@ public class AsociationSystemTest {
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--no-sandbox"); // Bypass OS security model, MUST BE THE VERY FIRST OPTION
-        // options.addArguments("--headless"); // To hide Chrome window
         options.addArguments("--disable-gpu"); // applicable to windows os only
         options.addArguments("--disable-extensions"); // disabling extensions
-        // options.setExperimentalOption("useAutomationExtension", false);
         options.addArguments("start-maximized"); // open Browser in maximized mode
         options.addArguments("--remote-allow-origins=*");
         options.addArguments("--force-device-scale-factor=0.8");

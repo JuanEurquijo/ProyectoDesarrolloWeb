@@ -44,10 +44,8 @@ public class DriverSystemTest {
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--no-sandbox"); // Bypass OS security model, MUST BE THE VERY FIRST OPTION
-        // options.addArguments("--headless"); // To hide Chrome window
         options.addArguments("--disable-gpu"); // applicable to windows os only
         options.addArguments("--disable-extensions"); // disabling extensions
-        // options.setExperimentalOption("useAutomationExtension", false);
         options.addArguments("start-maximized"); // open Browser in maximized mode
         options.addArguments("--remote-allow-origins=*");
         options.addArguments("--force-device-scale-factor=0.8");
@@ -68,8 +66,6 @@ public class DriverSystemTest {
     @Test
     void listDrivers() {
         browser.get(baseUrl + "/driver/list");
-       //WebElement btnDrivers = browser.findElement(By.id("linkdrivers"));
-       //btnDrivers.click();
         WebElement user = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("username")));
         user.sendKeys("coordinator");
         user.sendKeys(Keys.TAB);
@@ -89,10 +85,6 @@ public class DriverSystemTest {
     @Test
     void createDriver() {
         browser.get(baseUrl + "/driver/create");
-        //WebElement btnDrivers = browser.findElement(By.id("linkdrivers"));
-        //btnDrivers.click();
-        //WebElement btnDriver = browser.findElement(By.id("btnNewDriver"));
-        //btnDriver.click();
         WebElement nombre = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("name")));
         nombre.sendKeys(Keys.TAB);
         nombre.sendKeys("Pablo");
